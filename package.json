@@ -1,7 +1,7 @@
 {
   "name": "qenv",
   "version": "1.0.1",
-  "description": "smart handling of environment variables",
+  "description": "promised environments",
   "main": "dist/index.js",
   "scripts": {
     "test": "(npmts)"
