@@ -1,0 +1,35 @@
+{
+  "name": "qenv",
+  "version": "1.0.0",
+  "description": "smart handling of environment variables",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "(npmts)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/pushrocks/qenv.git"
+  },
+  "keywords": [
+    "environment",
+    "git",
+    "ci"
+  ],
+  "author": "Lossless GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/pushrocks/qenv/issues"
+  },
+  "homepage": "https://gitlab.com/pushrocks/qenv#README",
+  "devDependencies": {
+    "npmts-g": "^5.2.6",
+    "should": "^9.0.2",
+    "typings-test": "^1.0.1"
+  },
+  "dependencies": {
+    "beautylog": "^5.0.12",
+    "q": "^1.4.1",
+    "smartfile": "^3.0.10",
+    "typings-global": "^1.0.3"
+  }
+}
