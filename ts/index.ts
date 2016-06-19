@@ -20,7 +20,15 @@ let getEnvVarsRequired = (pathArg:string):string[] => {
     return result;
 }
 
-let getEnvVarsAvailable = ():string[] => {
+let getEnvVarsAvailable = (requiredEnvVarsArg:string[]):string[] => {
     let result = [];
+    for(let keyArg in requiredEnvVarsArg){
+        let envVar = requiredEnvVarsArg[keyArg];
+        if(process.env[envVar]){
+            result.push(envVar);
+        } else {
+            
+        }
+    }
     return result;
 }
