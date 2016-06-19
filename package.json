@@ -1,6 +1,6 @@
 {
   "name": "qenv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "promised environments",
   "main": "dist/index.js",
   "scripts": {
