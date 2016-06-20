@@ -1,9 +1,9 @@
 {
   "name": "qenv",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "promised environments",
   "main": "dist/index.js",
-  "typings":"dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "(npmts)"
   },
