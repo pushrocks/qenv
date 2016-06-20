@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "beautylog": "^5.0.12",
+    "lodash": "^4.13.1",
     "q": "^1.4.1",
     "smartfile": "^3.0.10",
     "typings-global": "^1.0.3"
