@@ -2,6 +2,18 @@
 provides an easy way for promised environments
 
 ## Usage
-qenv looks for an qenv.yml that defines needed env vars. qenv dirst checks if they are already specified.
-If not, qenv by default looks for a .nogit/env.yml file.
-If any env var is not specified, qenv throws an error and exits.
+qenv needs two files to work:
+
+* **qenv.yml** - specified which ENV vars are required
+* **env.yml** specified all env vars that are not already set in the current environment
+
+Now obviously you can set build specific env vars in many CI environments.
+So there we do not need an **env.yml** since all ENV vars are in place
+However when on another machine you can have a env.yml that will be added to the environment by qenv.
+
+```typescript
+import {Qenv} from "qenv";
+
+myQenv = new Qenv("path/to/dir/where/qenv.yml/is/","path/to/dir/where/env.yml/is(");
+
+``` 
