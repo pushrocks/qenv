@@ -1,4 +1,4 @@
-export declare class qenv {
+export declare class Qenv {
     requiredEnvVars: string[];
     availableEnvVars: string[];
     missingEnvVars: string[];

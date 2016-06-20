@@ -1,6 +1,6 @@
 import * as plugins from "./qenv.plugins";
 
-export class qenv {
+export class Qenv {
     requiredEnvVars:string[];
     availableEnvVars:string[];
     missingEnvVars:string[];
@@ -8,6 +8,9 @@ export class qenv {
         this.requiredEnvVars = getRequiredEnvVars(basePathArg);
         this.availableEnvVars = getAvailableEnvVars(this.requiredEnvVars,envYmlPathArg);
         this.missingEnvVars = getMissingEnvVars(this.requiredEnvVars,this.availableEnvVars);
+        for(let keyArg in this.missingEnvVars){
+            plugins.beautylog.warn(this.missingEnvVars[keyArg] + " is required, but missing!")
+        }
     }
 };
 
@@ -23,6 +26,7 @@ let getRequiredEnvVars = (pathArg:string):string[] => {
 
 let getAvailableEnvVars = (requiredEnvVarsArg:string[],envYmlPathArg:string):string[] => {
     let result = [];
+    envYmlPathArg = plugins.path.join(envYmlPathArg,"env.yml")
     let envYml;
     try {
         envYml = plugins.smartfile.local.toObjectSync(envYmlPathArg);
@@ -31,12 +35,12 @@ let getAvailableEnvVars = (requiredEnvVarsArg:string[],envYmlPathArg:string):str
         envYml = {};
     }
     for(let keyArg in requiredEnvVarsArg){
-        let envVar:string = requiredEnvVarsArg[keyArg];
-        if(process.env[envVar]){
-            result.push(envVar);
-        } else if(envYml.hasOwnPropery(envVar)){
-            process.env[envVar] = envYml.envVar;
-            result.push(envVar);
+        let requiredEnvVar:string = requiredEnvVarsArg[keyArg];
+        if(process.env[requiredEnvVar]){
+            result.push(requiredEnvVar);
+        } else if(envYml.hasOwnProperty(requiredEnvVar)){
+            process.env[requiredEnvVar] = envYml[requiredEnvVar];
+            result.push(requiredEnvVar);
         }
     }
     return result;
