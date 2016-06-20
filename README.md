@@ -2,10 +2,10 @@
 provides an easy way for promised environments
 
 ## Usage
-qenv needs two files to work:
+qenv works with two files:
 
-* **qenv.yml** - specified which ENV vars are required
-* **env.yml** specified all env vars that are not already set in the current environment
+* **qenv.yml** - specifies which ENV vars are required.
+* **env.yml** specifies all env vars that are not already set in the current environment.
 
 Now obviously you can set build specific env vars in many CI environments.
 So there we do not need an **env.yml** since all ENV vars are in place
