@@ -11,7 +11,9 @@ export class Qenv {
         
         //handle missing variables
         if (this.missingEnvVars.length > 0){
-            plugins.beautylog.error("Some Env variables could not be resolved:")
+            plugins.beautylog.info("Required Env Vars are:")
+            console.log(this.requiredEnvVars);
+            plugins.beautylog.error("However some Env variables could not be resolved:");
             console.log(this.missingEnvVars);
             if(failOnMissing){
                 plugins.beautylog.error("Exiting!")
