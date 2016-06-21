@@ -12,7 +12,7 @@ process.env["key1"] = "original"
 let qenvTestObject:Qenv;
 describe("Qenv class",function(){
     it("should create a new class",function(){
-        qenvTestObject = new Qenv(process.cwd(),process.cwd());
+        qenvTestObject = new Qenv(process.cwd(),process.cwd(),false);
     });
     it("key1 should be not be overwritten since it is already present",function(){
         process.env.key1.should.equal("original");

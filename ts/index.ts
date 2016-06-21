@@ -4,12 +4,19 @@ export class Qenv {
     requiredEnvVars:string[];
     availableEnvVars:string[];
     missingEnvVars:string[];
-    constructor(basePathArg = process.cwd(),envYmlPathArg){
+    constructor(basePathArg = process.cwd(),envYmlPathArg,failOnMissing = true){
         this.requiredEnvVars = getRequiredEnvVars(basePathArg);
         this.availableEnvVars = getAvailableEnvVars(this.requiredEnvVars,envYmlPathArg);
         this.missingEnvVars = getMissingEnvVars(this.requiredEnvVars,this.availableEnvVars);
-        for(let keyArg in this.missingEnvVars){
-            plugins.beautylog.warn(this.missingEnvVars[keyArg] + " is required, but missing!")
+        
+        //handle missing variables
+        if (this.missingEnvVars.length > 0){
+            plugins.beautylog.error("Some Env variables could not be resolved:")
+            console.log(this.missingEnvVars);
+            if(failOnMissing){
+                plugins.beautylog.error("Exiting!")
+                process.exit(1);
+            }
         }
     }
 };
@@ -32,6 +39,7 @@ let getAvailableEnvVars = (requiredEnvVarsArg:string[],envYmlPathArg:string):str
         envYml = plugins.smartfile.local.toObjectSync(envYmlPathArg);
     }
     catch(err){
+        plugins.beautylog.log("env file couldn't be found at " + envYmlPathArg)
         envYml = {};
     }
     for(let keyArg in requiredEnvVarsArg){
