@@ -1,4 +1,4 @@
-export interface keyValueObject {
+export interface IKeyValueObject {
     key: string;
     value: string;
 }
@@ -6,6 +6,6 @@ export declare class Qenv {
     requiredEnvVars: string[];
     availableEnvVars: string[];
     missingEnvVars: string[];
-    keyValueObjectArray: keyValueObject[];
+    keyValueObjectArray: IKeyValueObject[];
     constructor(basePathArg: string, envYmlPathArg: any, failOnMissing?: boolean);
 }

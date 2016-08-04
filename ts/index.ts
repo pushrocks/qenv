@@ -1,6 +1,6 @@
 import * as plugins from "./qenv.plugins";
 
-export interface keyValueObject {
+export interface IKeyValueObject {
     key: string,
     value: string
 };
@@ -9,7 +9,7 @@ export class Qenv {
     requiredEnvVars:string[] = [];
     availableEnvVars:string[] = [];
     missingEnvVars:string[] = [];
-    keyValueObjectArray:keyValueObject[] = [];
+    keyValueObjectArray:IKeyValueObject[] = [];
     constructor(basePathArg = process.cwd(),envYmlPathArg,failOnMissing = true){
         getRequiredEnvVars(basePathArg,this.requiredEnvVars);
         getAvailableEnvVars(this.requiredEnvVars,envYmlPathArg,this.availableEnvVars,this.keyValueObjectArray);
@@ -39,7 +39,7 @@ let getRequiredEnvVars = (pathArg:string, requiredEnvVarsArray:string[]) => {
 
 
 
-let getAvailableEnvVars = (requiredEnvVarsArg:string[],envYmlPathArg:string,availableEnvVarsArray:string[],keyValueObjectArrayArg:keyValueObject[]) => {
+let getAvailableEnvVars = (requiredEnvVarsArg:string[],envYmlPathArg:string,availableEnvVarsArray:string[],keyValueObjectArrayArg:IKeyValueObject[]) => {
     envYmlPathArg = plugins.path.join(envYmlPathArg,"env.yml")
     let envYml;
     try {
