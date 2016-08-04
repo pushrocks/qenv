@@ -19,6 +19,10 @@ describe("Qenv class",function(){
     });
     it("key2 should be read from Yml",function(){
         process.env.key2.should.equal("fromYml");
+    });
+    it("keyValueObjectArray should hold all retrieved values",function(){
+        qenvTestObject.keyValueObjectArray[0].value.should.equal("original");
+        qenvTestObject.keyValueObjectArray[1].value.should.equal("fromYml");
     })
 
 });
