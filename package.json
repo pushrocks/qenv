@@ -1,7 +1,7 @@
 {
   "name": "qenv",
   "version": "1.1.1",
-  "description": "promised environments",
+  "description": "easy promised environments",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
@@ -23,15 +23,15 @@
   },
   "homepage": "https://gitlab.com/pushrocks/qenv#README",
   "devDependencies": {
-    "npmts-g": "^5.2.8",
-    "should": "^10.0.0",
-    "typings-test": "^1.0.1"
+    "npmts-g": "^5.2.10",
+    "should": "^11.1.2",
+    "typings-test": "^1.0.3"
   },
   "dependencies": {
-    "beautylog": "^5.0.20",
-    "lodash": "^4.14.1",
+    "beautylog": "^6.0.0",
+    "lodash": "^4.17.3",
     "q": "^1.4.1",
-    "smartfile": "^4.0.13",
-    "typings-global": "^1.0.6"
+    "smartfile": "^4.1.0",
+    "typings-global": "^1.0.14"
   }
 }
