@@ -9,7 +9,7 @@ process.cwd = () => {
 
 process.env['key1'] = 'original'
 
-let qenvTestObject:Qenv
+let qenvTestObject: Qenv
 describe('Qenv class',function(){
     it('should create a new class',function(){
         qenvTestObject = new Qenv(process.cwd(),process.cwd(),false)

@@ -1,4 +1,4 @@
-import * as plugins from "./qenv.plugins"
+import * as plugins from './qenv.plugins'
 
 export interface IKeyValueObject {
     key: string,
@@ -7,16 +7,16 @@ export interface IKeyValueObject {
 
 export class Qenv {
     requiredEnvVars: string[] = []
-    availableEnvVars:string[] = []
-    missingEnvVars:string[] = []
-    keyValueObjectArray:IKeyValueObject[] = []
-    constructor(basePathArg = process.cwd(),envYmlPathArg,failOnMissing = true){
+    availableEnvVars: string[] = []
+    missingEnvVars: string[] = []
+    keyValueObjectArray: IKeyValueObject[] = []
+    constructor(basePathArg = process.cwd(),envYmlPathArg,failOnMissing = true) {
         getRequiredEnvVars(basePathArg,this.requiredEnvVars)
         getAvailableEnvVars(this.requiredEnvVars,envYmlPathArg,this.availableEnvVars,this.keyValueObjectArray)
         this.missingEnvVars = getMissingEnvVars(this.requiredEnvVars,this.availableEnvVars)
 
         // handle missing variables
-        if (this.missingEnvVars.length > 0){
+        if (this.missingEnvVars.length > 0) {
             console.info('Required Env Vars are:')
             console.log(this.requiredEnvVars)
             console.error('However some Env variables could not be resolved:')
@@ -37,9 +37,12 @@ let getRequiredEnvVars = (pathArg: string, requiredEnvVarsArray: string[]) => {
     };
 }
 
-
-
-let getAvailableEnvVars = (requiredEnvVarsArg: string[],envYmlPathArg: string,availableEnvVarsArray: string[],keyValueObjectArrayArg: IKeyValueObject[]) => {
+let getAvailableEnvVars = (
+    requiredEnvVarsArg: string[],
+    envYmlPathArg: string,
+    availableEnvVarsArray: string[],
+    keyValueObjectArrayArg: IKeyValueObject[]
+) => {
     envYmlPathArg = plugins.path.join(envYmlPathArg,'env.yml')
     let envYml
     try {
@@ -49,13 +52,13 @@ let getAvailableEnvVars = (requiredEnvVarsArg: string[],envYmlPathArg: string,av
         envYml = {}
     }
     for (let requiredEnvVar of requiredEnvVarsArg){
-        if (process.env[requiredEnvVar]){
+        if (process.env[requiredEnvVar]) {
             availableEnvVarsArray.push(requiredEnvVar)
             keyValueObjectArrayArg.push({
                 key: requiredEnvVar,
                 value: process.env[requiredEnvVar]
             })
-        } else if (envYml.hasOwnProperty(requiredEnvVar)){
+        } else if (envYml.hasOwnProperty(requiredEnvVar)) {
             process.env[requiredEnvVar] = envYml[requiredEnvVar]
             availableEnvVarsArray.push(requiredEnvVar)
             keyValueObjectArrayArg.push({
