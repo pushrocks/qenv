@@ -1,5 +1,4 @@
-import "typings-global";
-export import beautylog = require("beautylog");
+import 'typings-global';
 export declare let lodash: any;
-export import path = require("path");
-export import smartfile = require("smartfile");
+export import path = require('path');
+export import smartfile = require('smartfile');
