@@ -2,10 +2,10 @@
 easy promised environments
 
 ## Availabililty
-[![npm](https://push.rocks/assets/repo-button-npm.svg)](https://www.npmjs.com/package/qenv)
-[![git](https://push.rocks/assets/repo-button-git.svg)](https://GitLab.com/pushrocks/qenv)
-[![git](https://push.rocks/assets/repo-button-mirror.svg)](https://github.com/pushrocks/qenv)
-[![docs](https://push.rocks/assets/repo-button-docs.svg)](https://pushrocks.gitlab.io/qenv/)
+[![npm](https://pushrocks.gitlab.io/assets/repo-button-npm.svg)](https://www.npmjs.com/package/qenv)
+[![git](https://pushrocks.gitlab.io/assets/repo-button-git.svg)](https://GitLab.com/pushrocks/qenv)
+[![git](https://pushrocks.gitlab.io/assets/repo-button-mirror.svg)](https://github.com/pushrocks/qenv)
+[![docs](https://pushrocks.gitlab.io/assets/repo-button-docs.svg)](https://pushrocks.gitlab.io/qenv/)
 
 ## Status for master
 [![build status](https://GitLab.com/pushrocks/qenv/badges/master/build.svg)](https://GitLab.com/pushrocks/qenv/commits/master)
@@ -21,20 +21,9 @@ easy promised environments
 ## Usage
 Use TypeScript for best in class instellisense.
 
-qenv works with two files:
+For further information read the linked docs at the top of this README.
 
-* **qenv.yml** - specifies which ENV vars are required.
-* **env.yml** - specifies all env vars that are not already set in the current environment.
+> MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
+| By using this npm module you agree to our [privacy policy](https://lossless.gmbH/privacy.html)
 
-Now obviously you can set build specific env vars in many CI environments.
-So there we do not need an **env.yml** since all ENV vars are in place
-However when on another machine you can have a env.yml that will be added to the environment by qenv.
-
-```javascript
-import {Qenv} from "qenv";
-
-myQenv = new Qenv("path/to/dir/where/qenv.yml/is/","path/to/dir/where/env.yml/is(");
-
-``` 
-
-[![npm](https://push.rocks/assets/repo-header.svg)](https://push.rocks)
+[![repo-footer](https://pushrocks.gitlab.io/assets/repo-footer.svg)](https://push.rocks)
