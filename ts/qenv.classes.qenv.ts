@@ -12,6 +12,8 @@ export class Qenv {
   missingEnvVars: string[] = []
   keyValueObjectArray: IKeyValueObject[] = []
   constructor (basePathArg = process.cwd(), envYmlPathArg, failOnMissing = true) {
+    basePathArg = plugins.path.resolve(basePathArg)
+    envYmlPathArg = plugins.path.resolve(basePathArg)
     helpers.getRequiredEnvVars(basePathArg, this.requiredEnvVars)
     helpers.getAvailableEnvVars(this.requiredEnvVars, envYmlPathArg, this.availableEnvVars, this.keyValueObjectArray)
     this.missingEnvVars = helpers.getMissingEnvVars(this.requiredEnvVars, this.availableEnvVars)
