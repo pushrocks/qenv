@@ -25,7 +25,20 @@ easy promised environments
 
 Use TypeScript for best in class instellisense.
 
-For further information read the linked docs at the top of this README.
+qenv works with two files:
+
+- **qenv.yml** - specifies which ENV vars are required.
+- **env.yml** - specifies all env vars that are not already set in the current environment.
+
+Now obviously you can set build specific env vars in many CI environments.
+So there we do not need an **env.yml** since all ENV vars are in place
+However when on another machine you can have a env.yml that will be added to the environment by qenv.
+
+```javascript
+import { Qenv } from 'qenv';
+
+myQenv = new Qenv('path/to/dir/where/qenv.yml/is/', 'path/to/dir/where/env.yml/is(');
+```
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
 > | By using this npm module you agree to our [privacy policy](https://lossless.gmbH/privacy.html)
