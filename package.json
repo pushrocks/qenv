@@ -1,11 +1,13 @@
 {
-  "name": "qenv",
+  "name": "@pushrocks/qenv",
   "version": "1.1.7",
+  "private": false,
   "description": "easy promised environments",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "(npmts)"
+    "test": "(tstest test/)",
+    "build": "echo \"Not needed for now\""
   },
   "repository": {
     "type": "git",
@@ -23,11 +25,13 @@
   },
   "homepage": "https://gitlab.com/pushrocks/qenv#README",
   "devDependencies": {
-    "tapbundle": "^1.0.12"
+    "@gitzone/tsbuild": "^2.0.22",
+    "@gitzone/tsrun": "^1.1.12",
+    "@gitzone/tstest": "^1.0.13",
+    "@pushrocks/tapbundle": "^3.0.5",
+    "@types/node": "^10.5.8"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
-    "smartfile": "^4.2.11",
-    "typings-global": "^1.0.16"
+    "@pushrocks/smartfile": "^6.0.6"
   }
 }
