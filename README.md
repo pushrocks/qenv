@@ -37,7 +37,7 @@ However when on another machine you can have a env.yml that will be added to the
 ```javascript
 import { Qenv } from 'qenv';
 
-myQenv = new Qenv('path/to/dir/where/qenv.yml/is/', 'path/to/dir/where/env.yml/is(');
+const myQenv = new Qenv('path/to/dir/where/qenv.yml/is/', 'path/to/dir/where/env.yml/is(');
 ```
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
