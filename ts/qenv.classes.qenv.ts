@@ -108,7 +108,7 @@ export class Qenv {
     if (!qenvFile.required) {
       this.logger.log('warn', `env File does not contain a 'required' Array!`);
     }
-    for (const keyArg of Reflect.ownKeys(qenvFile.required)) {
+    for (const keyArg of Object.keys(qenvFile.required)) {
       this.requiredEnvVars.push(qenvFile.required[keyArg]);
     }
   }
