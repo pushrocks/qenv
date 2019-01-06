@@ -29,9 +29,12 @@
     "@gitzone/tsrun": "^1.1.12",
     "@gitzone/tstest": "^1.0.13",
     "@pushrocks/tapbundle": "^3.0.5",
-    "@types/node": "^10.5.8"
+    "@types/node": "^10.5.8",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0"
   },
   "dependencies": {
-    "@pushrocks/smartfile": "^6.0.6"
+    "@pushrocks/smartfile": "^6.0.6",
+    "@pushrocks/smartlog": "^2.0.9"
   }
 }
