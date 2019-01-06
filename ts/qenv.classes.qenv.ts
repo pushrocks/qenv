@@ -104,12 +104,16 @@ export class Qenv {
    * gets the required env values
    */
   private getRequiredEnvVars = () => {
-    const qenvFile = plugins.smartfile.fs.toObjectSync(this.qenvFilePathAbsolute);
-    if (!qenvFile.required) {
-      this.logger.log('warn', `env File does not contain a 'required' Array!`);
+    let qenvFile: any = {}; 
+    if(plugins.smartfile.fs.fileExistsSync(this.qenvFilePathAbsolute)) {
+      qenvFile = plugins.smartfile.fs.toObjectSync(this.qenvFilePathAbsolute);
     }
-    for (const keyArg of Object.keys(qenvFile.required)) {
-      this.requiredEnvVars.push(qenvFile.required[keyArg]);
+    if (!qenvFile || !qenvFile.required || !Array.isArray(qenvFile.required)) {
+      this.logger.log('warn', `env File does not contain a 'required' Array!`);
+    } else {
+      for (const keyArg of Object.keys(qenvFile.required)) {
+        this.requiredEnvVars.push(qenvFile.required[keyArg]);
+      }
     }
   }
 
