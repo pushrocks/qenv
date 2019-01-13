@@ -17,10 +17,12 @@ tap.test('should create a new class', async () => {
 
 tap.test('key1 should be not be overwritten since it is already present', async () => {
   expect(process.env.key1).to.equal('original');
+  expect(qenvTestObject.getEnvVarOnDemand('key1')).to.equal('original');
 });
 
 tap.test('key2 should be read from Yml', async () => {
   expect(process.env.key2).to.equal('fromYml');
+  expect(qenvTestObject.getEnvVarOnDemand('key2')).to.equal('fromYml');
 });
 
 tap.test('keyValueObjectArray should hold all retrieved values', async () => {

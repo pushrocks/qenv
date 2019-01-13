@@ -189,5 +189,5 @@ export class Qenv {
       }
     }
     return missingEnvVars;
-  };
+  }
 }
