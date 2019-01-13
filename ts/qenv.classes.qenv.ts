@@ -98,7 +98,7 @@ export class Qenv {
     if (
       plugins.smartfile.fs.isDirectory('/run') &&
       plugins.smartfile.fs.isDirectory('/run/secrets') &&
-      plugins.smartfile.fs.fileExists(`/run/secrets/${requiredEnvVar}`)
+      plugins.smartfile.fs.fileExistsSync(`/run/secrets/${requiredEnvVar}`)
     ) {
       dockerSecret = plugins.smartfile.fs.toStringSync(`/run/secrets/${requiredEnvVar}`);
     }
@@ -107,7 +107,7 @@ export class Qenv {
     if (
       plugins.smartfile.fs.isDirectory('/run') &&
       plugins.smartfile.fs.isDirectory('/run/secrets') &&
-      plugins.smartfile.fs.fileExists(`/run/secrets/secret.json`)
+      plugins.smartfile.fs.fileExistsSync(`/run/secrets/secret.json`)
     ) {
       const secretObject = plugins.smartfile.fs.toObjectSync('/run/secrets/secret.json');
       dockerSecret = secretObject[requiredEnvVar];
