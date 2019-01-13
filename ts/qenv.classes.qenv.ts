@@ -74,7 +74,6 @@ export class Qenv {
     try {
       envYml = plugins.smartfile.fs.toObjectSync(this.envFilePathAbsolute);
     } catch (err) {
-      console.log("env file couldn't be found at " + this.envFilePathAbsolute);
       envYml = {};
     }
     let envVar: string;
@@ -129,12 +128,16 @@ export class Qenv {
 
     let chosenVar: string = null;
     if (envVar) {
+      this.logger.log('ok', `found ${requiredEnvVar} as environment variable`);
       chosenVar = envVar;
     } else if (envFileVar) {
+      this.logger.log('ok', `found ${requiredEnvVar} as env.yml variable`);
       chosenVar = envFileVar;
     } else if (dockerSecret) {
+      this.logger.log('ok', `found ${requiredEnvVar} as docker secret`);
       chosenVar = dockerSecret;
     } else if (dockerSecretJson) {
+      this.logger.log('ok', `found ${requiredEnvVar} as docker secret.json`);
       chosenVar = dockerSecretJson;
     }
     return chosenVar;
