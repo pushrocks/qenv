@@ -1,4 +1,5 @@
 import * as plugins from './qenv.plugins';
+plugins.smartlog.defaultLogger.enableConsole();
 
 export interface IKeyValueObject {
   key: string;
