@@ -106,11 +106,15 @@ export class Qenv {
     // docker secret.json
     if (
       plugins.smartfile.fs.isDirectory('/run') &&
-      plugins.smartfile.fs.isDirectory('/run/secrets') &&
-      plugins.smartfile.fs.fileExistsSync(`/run/secrets/secret.json`)
+      plugins.smartfile.fs.isDirectory('/run/secrets')
     ) {
-      const secretObject = plugins.smartfile.fs.toObjectSync('/run/secrets/secret.json');
-      dockerSecret = secretObject[requiredEnvVar];
+      const availableSecrets = plugins.smartfile.fs.listAllItemsSync('/run/secrets');
+      for (const secret of availableSecrets) {
+        if (secret.includes('secret.json') && !dockerSecret) {
+          const secretObject = plugins.smartfile.fs.toObjectSync('/run/secrets/secret.json');
+          dockerSecret = secretObject[requiredEnvVar];
+        }
+      }
     }
 
     // warn if there is more than one candidate
@@ -189,5 +193,5 @@ export class Qenv {
       }
     }
     return missingEnvVars;
-  }
+  };
 }
