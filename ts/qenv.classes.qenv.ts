@@ -111,7 +111,7 @@ export class Qenv {
       const availableSecrets = plugins.smartfile.fs.listAllItemsSync('/run/secrets');
       for (const secret of availableSecrets) {
         if (secret.includes('secret.json') && !dockerSecret) {
-          const secretObject = plugins.smartfile.fs.toObjectSync('/run/secrets/secret.json');
+          const secretObject = plugins.smartfile.fs.toObjectSync(`/run/secrets/${secret}`);
           dockerSecret = secretObject[requiredEnvVar];
         }
       }
