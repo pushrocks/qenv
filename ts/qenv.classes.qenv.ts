@@ -1,11 +1,6 @@
 import * as plugins from './qenv.plugins';
 plugins.smartlog.defaultLogger.enableConsole();
 
-export interface IKeyValueObject {
-  key: string;
-  value: string;
-}
-
 /**
  * class Qenv
  * allows to make assertions about the environments while being more flexibel in how to meet them
@@ -14,7 +9,7 @@ export class Qenv {
   public requiredEnvVars: string[] = [];
   public availableEnvVars: string[] = [];
   public missingEnvVars: string[] = [];
-  public keyValueObjectArray: IKeyValueObject[] = [];
+  public keyValueObject: {[key: string]: any } = {};
   public logger: plugins.smartlog.Smartlog;
 
   // filePaths
@@ -62,7 +57,7 @@ export class Qenv {
    * @param envVarName
    */
   public getEnvVarRequired(envVarName): string {
-    return process.env[envVarName];
+    return this.keyValueObject[envVarName];
   }
 
   /**
@@ -173,14 +168,10 @@ export class Qenv {
       const chosenVar = this.getEnvVarOnDemand(requiredEnvVar);
       if (chosenVar) {
         this.availableEnvVars.push(requiredEnvVar);
-        process.env[requiredEnvVar] = chosenVar;
-        this.keyValueObjectArray.push({
-          key: requiredEnvVar,
-          value: chosenVar
-        });
+        this.keyValueObject[requiredEnvVar] = chosenVar;
       }
     }
-  };
+  }
 
   /**
    * gets missing env vars

@@ -4,30 +4,30 @@ import * as qenv from '../ts/index';
 
 process.env['key1'] = 'original';
 
-let qenvTestObject: qenv.Qenv;
+let testQenv: qenv.Qenv;
 
 tap.test('should create a new class', async () => {
-  qenvTestObject = new qenv.Qenv(
+  testQenv = new qenv.Qenv(
     path.join(__dirname, 'assets'),
     path.join(__dirname, 'assets'),
     false
   );
-  expect(qenvTestObject).to.be.instanceof(qenv.Qenv);
+  expect(testQenv).to.be.instanceof(qenv.Qenv);
 });
 
 tap.test('key1 should be not be overwritten since it is already present', async () => {
-  expect(process.env.key1).to.equal('original');
-  expect(qenvTestObject.getEnvVarOnDemand('key1')).to.equal('original');
+  expect(testQenv.getEnvVarRequired('key1')).to.equal('original');
+  expect(testQenv.getEnvVarOnDemand('key1')).to.equal('original');
 });
 
 tap.test('key2 should be read from Yml', async () => {
-  expect(process.env.key2).to.equal('fromYml');
-  expect(qenvTestObject.getEnvVarOnDemand('key2')).to.equal('fromYml');
+  expect(testQenv.getEnvVarRequired('key2')).to.equal('fromYml');
+  expect(testQenv.getEnvVarOnDemand('key2')).to.equal('fromYml');
 });
 
 tap.test('keyValueObjectArray should hold all retrieved values', async () => {
-  expect(qenvTestObject.keyValueObjectArray[0].value).to.equal('original');
-  expect(qenvTestObject.keyValueObjectArray[1].value).to.equal('fromYml');
+  expect(testQenv.keyValueObject.key1).to.equal('original');
+  expect(testQenv.keyValueObject.key2).to.equal('fromYml');
 });
 
 tap.start();
