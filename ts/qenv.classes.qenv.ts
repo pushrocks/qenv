@@ -31,7 +31,7 @@ export class Qenv {
     );
     this.envFilePathAbsolute = plugins.path.join(
       plugins.path.resolve(envFileBasePathArg),
-      'env.yml'
+      'env.json'
     );
 
     this.getRequiredEnvVars();
@@ -131,7 +131,7 @@ export class Qenv {
       this.logger.log('ok', `found ${requiredEnvVar} as environment variable`);
       chosenVar = envVar;
     } else if (envFileVar) {
-      this.logger.log('ok', `found ${requiredEnvVar} as env.yml variable`);
+      this.logger.log('ok', `found ${requiredEnvVar} as env.json variable`);
       chosenVar = envFileVar;
     } else if (dockerSecret) {
       this.logger.log('ok', `found ${requiredEnvVar} as docker secret`);

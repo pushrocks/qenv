@@ -17,13 +17,13 @@ tap.test('key1 should be not be overwritten since it is already present', async 
 });
 
 tap.test('key2 should be read from Yml', async () => {
-  expect(testQenv.getEnvVarRequired('key2')).to.equal('fromYml');
-  expect(testQenv.getEnvVarOnDemand('key2')).to.equal('fromYml');
+  expect(testQenv.getEnvVarRequired('key2')).to.equal('fromJson');
+  expect(testQenv.getEnvVarOnDemand('key2')).to.equal('fromJson');
 });
 
 tap.test('keyValueObjectArray should hold all retrieved values', async () => {
   expect(testQenv.keyValueObject.key1).to.equal('original');
-  expect(testQenv.keyValueObject.key2).to.equal('fromYml');
+  expect(testQenv.keyValueObject.key2).to.equal('fromJson');
 });
 
 tap.start();
