@@ -7,11 +7,7 @@ process.env['key1'] = 'original';
 let testQenv: qenv.Qenv;
 
 tap.test('should create a new class', async () => {
-  testQenv = new qenv.Qenv(
-    path.join(__dirname, 'assets'),
-    path.join(__dirname, 'assets'),
-    false
-  );
+  testQenv = new qenv.Qenv(path.join(__dirname, 'assets'), path.join(__dirname, 'assets'), false);
   expect(testQenv).to.be.instanceof(qenv.Qenv);
 });
 

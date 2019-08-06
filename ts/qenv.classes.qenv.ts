@@ -9,7 +9,7 @@ export class Qenv {
   public requiredEnvVars: string[] = [];
   public availableEnvVars: string[] = [];
   public missingEnvVars: string[] = [];
-  public keyValueObject: {[key: string]: any } = {};
+  public keyValueObject: { [key: string]: any } = {};
   public logger: plugins.smartlog.Smartlog;
 
   // filePaths
@@ -171,7 +171,7 @@ export class Qenv {
         this.keyValueObject[requiredEnvVar] = chosenVar;
       }
     }
-  }
+  };
 
   /**
    * gets missing env vars

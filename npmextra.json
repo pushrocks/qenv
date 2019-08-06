@@ -2,5 +2,15 @@
   "npmci": {
     "npmGlobalTools": [],
     "npmAccessLevel": "public"
+  },
+  "gitzone": {
+    "module": {
+      "githost": "gitlab.com",
+      "gitscope": "pushrocks",
+      "gitrepo": "qenv",
+      "shortDescription": "easy promised environments",
+      "npmPackagename": "@pushrocks/qenv",
+      "license": "MIT"
+    }
   }
 }
