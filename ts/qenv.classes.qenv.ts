@@ -48,6 +48,8 @@ export class Qenv {
       if (failOnMissing) {
         console.error('Exiting!');
         process.exit(1);
+      } else {
+        console.log('qenv is not set to fail on missing environment variables');
       }
     }
   }
