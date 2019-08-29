@@ -25,12 +25,12 @@
   },
   "homepage": "https://gitlab.com/pushrocks/qenv#README",
   "devDependencies": {
-    "@gitzone/tsbuild": "^2.1.11",
+    "@gitzone/tsbuild": "^2.1.17",
     "@gitzone/tsrun": "^1.2.8",
     "@gitzone/tstest": "^1.0.24",
-    "@pushrocks/tapbundle": "^3.0.11",
-    "@types/node": "^12.6.9",
-    "tslint": "^5.18.0",
+    "@pushrocks/tapbundle": "^3.0.13",
+    "@types/node": "^12.7.2",
+    "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0"
   },
   "dependencies": {

@@ -46,10 +46,10 @@ export class Qenv {
       console.error('However some Env variables could not be resolved:');
       console.log(this.missingEnvVars);
       if (failOnMissing) {
-        console.error('Exiting!');
+        this.logger.log('error', 'Exiting!');
         process.exit(1);
       } else {
-        console.log('qenv is not set to fail on missing environment variables');
+        this.logger.log('warn', 'qenv is not set to fail on missing environment variables');
       }
     }
   }
@@ -154,13 +154,13 @@ export class Qenv {
       qenvFile = plugins.smartfile.fs.toObjectSync(this.qenvFilePathAbsolute);
     }
     if (!qenvFile || !qenvFile.required || !Array.isArray(qenvFile.required)) {
-      this.logger.log('warn', `env File does not contain a 'required' Array!`);
+      this.logger.log('warn', `qenv (promised environment): ./env.yml File does not contain a 'required' Array!`);
     } else {
       for (const keyArg of Object.keys(qenvFile.required)) {
         this.requiredEnvVars.push(qenvFile.required[keyArg]);
       }
     }
-  };
+  }
 
   /**
    * gets the available env vars
