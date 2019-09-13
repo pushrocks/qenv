@@ -29,8 +29,8 @@
     "@gitzone/tsrun": "^1.2.8",
     "@gitzone/tstest": "^1.0.24",
     "@pushrocks/tapbundle": "^3.0.13",
-    "@types/node": "^12.7.2",
-    "tslint": "^5.19.0",
+    "@types/node": "^12.7.5",
+    "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0"
   },
   "dependencies": {

@@ -64,40 +64,39 @@ export class Qenv {
 
   /**
    * tries to get any env var even if it is not required
-   * @param requiredEnvVar
+   * @param wantedEnvVar
    */
-  public getEnvVarOnDemand(requiredEnvVar: string): string {
-    // lets determine the actual env yml
-    let envYml;
-    try {
-      envYml = plugins.smartfile.fs.toObjectSync(this.envFilePathAbsolute);
-    } catch (err) {
-      envYml = {};
-    }
-    let envVar: string;
-    let envFileVar: string;
-    let dockerSecret: string;
+  public getEnvVarOnDemand(wantedEnvVar: string): string {
+    let envVarFromEnvironmentVariable: string;
+    let envVarFromEnvJsonFile: string;
+    let envVarFromDockerSecret: string;
     let dockerSecretJson: string;
 
     // env var check
-    if (process.env[requiredEnvVar]) {
-      this.availableEnvVars.push(requiredEnvVar);
-      envVar = process.env[requiredEnvVar];
+    if (process.env[wantedEnvVar]) {
+      this.availableEnvVars.push(wantedEnvVar);
+      envVarFromEnvironmentVariable = process.env[wantedEnvVar];
     }
 
     // env file check
-    if (envYml.hasOwnProperty(requiredEnvVar)) {
-      envFileVar = envYml[requiredEnvVar];
-      this.availableEnvVars.push(requiredEnvVar);
+    // lets determine the actual env yml
+    let envJsonFileAsObject;
+    try {
+      envJsonFileAsObject = plugins.smartfile.fs.toObjectSync(this.envFilePathAbsolute);
+    } catch (err) {
+      envJsonFileAsObject = {};
+    }
+    if (envJsonFileAsObject.hasOwnProperty(wantedEnvVar)) {
+      envVarFromEnvJsonFile = envJsonFileAsObject[wantedEnvVar];
     }
 
     // docker secret check
     if (
       plugins.smartfile.fs.isDirectory('/run') &&
       plugins.smartfile.fs.isDirectory('/run/secrets') &&
-      plugins.smartfile.fs.fileExistsSync(`/run/secrets/${requiredEnvVar}`)
+      plugins.smartfile.fs.fileExistsSync(`/run/secrets/${wantedEnvVar}`)
     ) {
-      dockerSecret = plugins.smartfile.fs.toStringSync(`/run/secrets/${requiredEnvVar}`);
+      envVarFromDockerSecret = plugins.smartfile.fs.toStringSync(`/run/secrets/${wantedEnvVar}`);
     }
 
     // docker secret.json
@@ -107,42 +106,53 @@ export class Qenv {
     ) {
       const availableSecrets = plugins.smartfile.fs.listAllItemsSync('/run/secrets');
       for (const secret of availableSecrets) {
-        if (secret.includes('secret.json') && !dockerSecret) {
+        if (secret.includes('secret.json') && !envVarFromDockerSecret) {
           const secretObject = plugins.smartfile.fs.toObjectSync(`/run/secrets/${secret}`);
-          dockerSecret = secretObject[requiredEnvVar];
+          envVarFromDockerSecret = secretObject[wantedEnvVar];
         }
       }
     }
 
     // warn if there is more than one candidate
-    let candidatesCounter = 0;
-    [envVar, envFileVar, dockerSecret, dockerSecretJson].forEach(candidate => {
+    const availableCcandidates: any[] = [];
+    [
+      envVarFromEnvironmentVariable,
+      envVarFromEnvJsonFile,
+      envVarFromDockerSecret,
+      dockerSecretJson
+    ].forEach(candidate => {
       if (candidate) {
-        candidatesCounter++;
+        availableCcandidates.push(candidate);
       }
     });
-    if (candidatesCounter > 1) {
+    if (availableCcandidates.length > 1) {
       this.logger.log(
         'warn',
-        `found multiple candidates for ${requiredEnvVar} Choosing in the order of envVar, envFileVar, dockerSecret, dockerSecretJson`
+        `found multiple candidates for ${wantedEnvVar} Choosing in the order of envVar, envFileVar, dockerSecret, dockerSecretJson`
       );
+      console.log(availableCcandidates);
     }
 
-    let chosenVar: string = null;
-    if (envVar) {
-      this.logger.log('ok', `found ${requiredEnvVar} as environment variable`);
-      chosenVar = envVar;
-    } else if (envFileVar) {
-      this.logger.log('ok', `found ${requiredEnvVar} as env.json variable`);
-      chosenVar = envFileVar;
-    } else if (dockerSecret) {
-      this.logger.log('ok', `found ${requiredEnvVar} as docker secret`);
-      chosenVar = dockerSecret;
-    } else if (dockerSecretJson) {
-      this.logger.log('ok', `found ${requiredEnvVar} as docker secret.json`);
-      chosenVar = dockerSecretJson;
+    switch (true) {
+      case !!envVarFromEnvironmentVariable:
+        this.logger.log('ok', `found ${wantedEnvVar} as environment variable`);
+        return envVarFromEnvironmentVariable;
+      case !!envVarFromEnvJsonFile:
+        this.logger.log('ok', `found ${wantedEnvVar} as env.json variable`);
+        return envVarFromEnvJsonFile;
+      case !!envVarFromDockerSecret:
+        this.logger.log('ok', `found ${wantedEnvVar} as docker secret`);
+        return envVarFromDockerSecret;
+      case !!dockerSecretJson:
+        this.logger.log('ok', `found ${wantedEnvVar} as docker secret.json`);
+        return dockerSecretJson;
+      default:
+        this.logger.log(
+          'warn',
+          `could not find the wanted environment variable ${wantedEnvVar} anywhere`
+        );
+        return;
     }
-    return chosenVar;
   }
 
   /**
@@ -154,13 +164,16 @@ export class Qenv {
       qenvFile = plugins.smartfile.fs.toObjectSync(this.qenvFilePathAbsolute);
     }
     if (!qenvFile || !qenvFile.required || !Array.isArray(qenvFile.required)) {
-      this.logger.log('warn', `qenv (promised environment): ./env.yml File does not contain a 'required' Array!`);
+      this.logger.log(
+        'warn',
+        `qenv (promised environment): ./env.yml File does not contain a 'required' Array!`
+      );
     } else {
       for (const keyArg of Object.keys(qenvFile.required)) {
         this.requiredEnvVars.push(qenvFile.required[keyArg]);
       }
     }
-  }
+  };
 
   /**
    * gets the available env vars
