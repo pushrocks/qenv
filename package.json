@@ -1,6 +1,6 @@
 {
   "name": "@pushrocks/qenv",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "private": false,
   "description": "easy promised environments",
   "main": "dist/index.js",
