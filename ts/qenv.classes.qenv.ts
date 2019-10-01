@@ -166,7 +166,7 @@ export class Qenv {
     if (!qenvFile || !qenvFile.required || !Array.isArray(qenvFile.required)) {
       this.logger.log(
         'warn',
-        `qenv (promised environment): ./env.yml File does not contain a 'required' Array!`
+        `qenv (promised environment): ./qenv.yml File does not contain a 'required' Array! This might be ok though.`
       );
     } else {
       for (const keyArg of Object.keys(qenvFile.required)) {
