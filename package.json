@@ -25,17 +25,17 @@
   },
   "homepage": "https://gitlab.com/pushrocks/qenv#README",
   "devDependencies": {
-    "@gitzone/tsbuild": "^2.1.17",
-    "@gitzone/tsrun": "^1.2.8",
-    "@gitzone/tstest": "^1.0.24",
-    "@pushrocks/tapbundle": "^3.0.13",
-    "@types/node": "^12.7.8",
-    "tslint": "^5.20.0",
+    "@gitzone/tsbuild": "^2.1.24",
+    "@gitzone/tsrun": "^1.2.12",
+    "@gitzone/tstest": "^1.0.33",
+    "@pushrocks/tapbundle": "^3.2.1",
+    "@types/node": "^14.0.12",
+    "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0"
   },
   "dependencies": {
-    "@pushrocks/smartfile": "^7.0.6",
-    "@pushrocks/smartlog": "^2.0.19"
+    "@pushrocks/smartfile": "^7.0.12",
+    "@pushrocks/smartlog": "^2.0.26"
   },
   "files": [
     "ts/*",

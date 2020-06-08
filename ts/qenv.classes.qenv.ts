@@ -1,5 +1,4 @@
 import * as plugins from './qenv.plugins';
-plugins.smartlog.defaultLogger.enableConsole();
 
 /**
  * class Qenv
@@ -10,7 +9,7 @@ export class Qenv {
   public availableEnvVars: string[] = [];
   public missingEnvVars: string[] = [];
   public keyValueObject: { [key: string]: any } = {};
-  public logger: plugins.smartlog.Smartlog;
+  public logger = new plugins.smartlog.ConsoleLog();
 
   // filePaths
   public qenvFilePathAbsolute: string;
@@ -19,10 +18,8 @@ export class Qenv {
   constructor(
     qenvFileBasePathArg = process.cwd(),
     envFileBasePathArg,
-    failOnMissing = true,
-    loggerArg: plugins.smartlog.Smartlog = plugins.smartlog.defaultLogger
+    failOnMissing = true
   ) {
-    this.logger = loggerArg;
 
     // lets make sure paths are absolute
     this.qenvFilePathAbsolute = plugins.path.join(
