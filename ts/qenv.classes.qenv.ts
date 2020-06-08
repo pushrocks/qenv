@@ -15,12 +15,7 @@ export class Qenv {
   public qenvFilePathAbsolute: string;
   public envFilePathAbsolute: string;
 
-  constructor(
-    qenvFileBasePathArg = process.cwd(),
-    envFileBasePathArg,
-    failOnMissing = true
-  ) {
-
+  constructor(qenvFileBasePathArg = process.cwd(), envFileBasePathArg, failOnMissing = true) {
     // lets make sure paths are absolute
     this.qenvFilePathAbsolute = plugins.path.join(
       plugins.path.resolve(qenvFileBasePathArg),
